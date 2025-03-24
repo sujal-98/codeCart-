@@ -1,0 +1,36 @@
+# Next.js build output
+.next/
+
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency lock files (optional, remove if you want to commit these)
+# package-lock.json
+# yarn.lock
+
+# Build output (if you have additional build directories)
+dist/
+build/
+
+# macOS system files
+.DS_Store
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

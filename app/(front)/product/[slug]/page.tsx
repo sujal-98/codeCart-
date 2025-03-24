@@ -5,8 +5,13 @@ import productService from '@/lib/services/ProductService';
 import { convertDocToObj } from '@/lib/utils';
 import AddToCart from '@/components/products/AddToCart';
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const product = await productService.getSlug(params.slug);
+type PageProps = {
+  params: Promise<{ slug: string }>; // params is a Promise in some Next.js type contexts
+};
+
+export async function generateMetadata({ params }: PageProps) {
+  const resolvedParams = await params; // Ensure params is resolved if it's a promise
+  const product = await productService.getSlug(resolvedParams.slug);
   if (!product) {
     return { title: 'Product not found' };
   }
@@ -16,8 +21,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-async function ProductDetails({ params }: { params: { slug: string } }) {
-  const product = await productService.getSlug(params.slug);
+async function ProductDetails({ params }: PageProps) {
+  const resolvedParams = await params; // Ensure params is resolved if it's a promise
+  const product = await productService.getSlug(resolvedParams.slug);
+
   if (!product) {
     return (
       <div className="flex items-center justify-center h-screen bg-gray-100 dark:bg-gray-800">
@@ -38,6 +45,8 @@ async function ProductDetails({ params }: { params: { slug: string } }) {
       </div>
     );
   }
+
+
 
   return (
     <>
